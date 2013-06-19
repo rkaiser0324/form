@@ -270,7 +270,16 @@ $.fn.ajaxSubmit = function(options) {
         var formdata = new FormData();
 
         for (var i=0; i < a.length; i++) {
-            formdata.append(a[i].name, a[i].value);
+
+            if (a[i].name == 'userfile[]' && dragfiles.length > 0)
+            {
+                for (var j=0; j < dragfiles.length; j++)
+                {
+                    formdata.append(a[i].name, dragfiles[j]);
+                }
+            }
+            else
+                formdata.append(a[i].name, a[i].value);
         }
 
         if (options.extraData) {
